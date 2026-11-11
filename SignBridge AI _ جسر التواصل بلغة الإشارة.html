@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SignBridge AI | جسر التواصل بلغة الإشارة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ff;--card:#fff;--tx:#1f1b3a;--mu:#5d5a78;--p:#5b4bc4;--pb:#5b4bc4;--a:#0a9d8d;--bd:#e3dffa;--sh:0 8px 28px rgba(91,75,196,.12);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13112a;--card:#1d1a3d;--tx:#f1efff;--mu:#b0acd6;--p:#a898ff;--a:#2dd4bf;--bd:#2f2b5c;--sh:0 8px 28px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#13112a;--card:#1d1a3d;--tx:#f1efff;--mu:#b0acd6;--p:#a898ff;--a:#2dd4bf;--bd:#2f2b5c;--sh:0 8px 28px rgba(0,0,0,.4);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0;font-family:Cairo,Tahoma,"Segoe UI",sans-serif;background:var(--bg);color:var(--tx);line-height:1.8}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--card);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:16px;padding:10px 5%}
+.logo{font-weight:800;font-size:1.2rem;color:var(--p);white-space:nowrap}
+nav{display:flex;gap:4px;overflow-x:auto;flex:1}
+nav a{padding:6px 12px;border-radius:20px;color:var(--mu);text-decoration:none;font-weight:600;white-space:nowrap;font-size:.9rem}
+nav a:hover{background:var(--bg);color:var(--p)}
+section{padding:56px 5%;max-width:1060px;margin:auto}
+h2{font-size:1.8rem;margin:.1em 0 .3em}
+.tag{color:var(--a);font-weight:700;font-size:.9rem}
+.lead{color:var(--mu);margin:0 0 26px}
+.hero{max-width:none;background:linear-gradient(135deg,#43339f,#7d6adb 60%,#0a9d8d);color:#fff;text-align:center;padding:64px 5% 56px}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.15em 0;line-height:1.3}
+.hero p{max-width:640px;margin:0 auto 22px;opacity:.95}
+.hand{font-size:3.6rem;display:inline-block;animation:w 2.4s ease-in-out infinite}
+@keyframes w{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(12deg)}}
+.btn{display:inline-block;padding:11px 26px;border-radius:30px;font:inherit;font-weight:700;border:0;cursor:pointer;text-decoration:none;background:#fff;color:#43339f;margin:4px}
+.btn.o{background:transparent;color:#fff;border:2px solid #fff}
+.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+.stats div{background:rgba(255,255,255,.16);border-radius:16px;padding:8px 22px;font-size:.9rem}
+.stats b{display:block;font-size:1.6rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:22px;box-shadow:var(--sh)}
+.card .ic{font-size:2.2rem}
+.card h3{margin:.2em 0}
+.card p{margin:0;color:var(--mu)}
+.big{margin-bottom:16px;border-inline-start:6px solid var(--a)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tab{padding:8px 18px;border-radius:24px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;font-weight:600;cursor:pointer}
+.tab.on{background:var(--pb);color:#fff;border-color:var(--pb)}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.step{background:var(--bg);border:2px solid var(--bd);border-radius:16px;padding:14px;text-align:center;transition:.3s;font-size:.92rem}
+.step i{display:block;font-style:normal;font-size:1.9rem}
+.step.on{border-color:var(--a);transform:translateY(-4px);box-shadow:var(--sh)}
+@media(max-width:560px){.flow{grid-template-columns:1fr}}
+.out{min-height:72px;border-radius:16px;padding:14px 18px;background:var(--bg);border:1px dashed var(--bd);color:var(--mu);margin-bottom:14px}
+.out.show{background:var(--pb);color:#fff;border:0;font-weight:600}
+.go{background:var(--pb);color:#fff;margin:0}
+.opt{display:block;width:100%;text-align:right;margin:8px 0;padding:12px 16px;border-radius:14px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;cursor:pointer}
+.opt.ok{border-color:#16a34a;background:rgba(22,163,74,.18)}
+.opt.no{border-color:#dc2626;background:rgba(220,38,38,.18)}
+.bar{height:8px;background:var(--bd);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--a);width:0;transition:.4s}
+footer{text-align:center;color:var(--mu);padding:30px 5% 40px;border-top:1px solid var(--bd);font-size:.9rem}
+
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+#v{display:none;width:100%;border-radius:16px;background:#000;transform:scaleX(-1);margin-bottom:10px}
+#av{width:100%;max-width:360px;display:block;margin:0 auto;background:var(--bg);border-radius:20px}#av .h{stroke:#5a2e1f;stroke-width:.8;stroke-linejoin:round}.sp{animation:tw 2.4s ease-in-out infinite}@keyframes tw{0%,100%{opacity:.15}50%{opacity:1}}#av .o{stroke:#3b2626;stroke-width:.9;stroke-linejoin:round}#ey{transform-box:fill-box;transform-origin:center}
+.tx{width:100%;padding:10px 14px;border-radius:14px;border:1.5px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit;margin:4px 0 8px}
+.chip{display:inline-block;padding:0 12px;margin:3px;border-radius:14px;border:1px solid var(--bd)}
+.chip.on{background:var(--a);color:#fff}
+.go{margin:0 0 6px 6px}.go[disabled]{opacity:.5}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🤟 SignBridge AI</div>
+<nav>
+<a href="#idea">الفكرة</a><a href="#ai">دور الذكاء الاصطناعي</a><a href="#demo">جرّب المحاكاة</a><a href="#perks">المزايا</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hand">🤟</div>
+<h1>SignBridge AI</h1>
+<p>نظام مترجم بلغة الإشارة ثنائي الاتجاه في الأماكن العامة، يجعل الحوار بين الأشخاص الصم والموظفين لحظيًا وسهلًا.</p>
+<a class="btn" href="#demo">جرّب المحاكاة</a><a class="btn o" href="#idea">اعرف الفكرة</a>
+<div class="stats"><div><b>٢</b>اتجاه للترجمة</div><div><b>٣</b>أماكن للاستخدام</div><div><b>لحظي</b>بدون انتظار</div></div>
+</section>
+
+<section id="idea">
+<div class="tag">الفكرة</div>
+<h2>شاشة ذكية في قلب الخدمة</h2>
+<p class="lead">شاشة تُوضع في المصالح الحكومية أو المستشفيات أو البنوك، فتصبح جسرًا بين الشخص الأصم والموظف.</p>
+<div class="grid">
+<div class="card"><div class="ic">🏛️</div><h3>المصالح الحكومية</h3><p>إنهاء الأوراق والخدمات بوضوح وبدون مرافق.</p></div>
+<div class="card"><div class="ic">🏥</div><h3>المستشفيات</h3><p>شرح الأعراض وفهم تعليمات الطبيب بدقة.</p></div>
+<div class="card"><div class="ic">🏦</div><h3>البنوك</h3><p>فتح الحسابات والاستفسارات المالية باستقلالية.</p></div>
+</div>
+</section>
+
+<section id="ai">
+<div class="tag">دور الذكاء الاصطناعي</div>
+<h2>ترجمة تعمل في الاتجاهين</h2>
+<p class="lead">الذكاء الاصطناعي هو العقل الذي يحوّل كل لغة إلى الأخرى في نفس اللحظة.</p>
+<div class="card big"><div class="ic">👋 ← 💬</div><h3>من الأصم إلى الموظف</h3><p>يحوّل الذكاء الاصطناعي لغة الإشارة التي تلتقطها الكاميرا إلى صوت أو نص مكتوب يراه الموظف فورًا.</p></div>
+<div class="card big"><div class="ic">🗣️ ← 🧑‍🎤</div><h3>من الموظف إلى الأصم</h3><p>يحوّل كلام الموظف الصوتي إلى شخصية كرتونية (Avatar) تترجمه بلغة الإشارة في نفس اللحظة.</p></div>
+</section>
+
+<section id="demo">
+<div class="tag">تجربة حقيقية</div>
+<h2>جرّب الترجمة في الاتجاهين</h2>
+<p class="lead">الكاميرا والميكروفون يعملان فعليًا على جهازك، والذكاء الاصطناعي يتولى الترجمة.</p>
+<div class="two">
+<div class="card"><h3>👋 من الأصم إلى الموظف</h3>
+<video id="v" autoplay playsinline muted></video>
+<button class="btn go" onclick="cam()">📷 شغّل الكاميرا</button><button class="btn go" id="snap" onclick="snap()" disabled>🤟 التقط الإشارة</button>
+<div class="out" id="o1" style="margin-top:12px">شغّل الكاميرا، ثم اضغط «التقط الإشارة» وأدِّ الإشارة أمامها.</div></div>
+<div class="card"><h3>🗣️ من الموظف إلى الأصم</h3>
+<svg viewBox="-14 -10 228 334" id="av"><defs>
+<linearGradient id="ir" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3a7a"/><stop offset=".5" stop-color="#8e7bc4"/><stop offset="1" stop-color="#e3dcf7"/></linearGradient>
+<linearGradient id="hg" gradientUnits="userSpaceOnUse" x1="0" y1="8" x2="0" y2="236"><stop offset="0" stop-color="#bf7048"/><stop offset=".45" stop-color="#a65b3b"/><stop offset="1" stop-color="#8a4a2e"/></linearGradient>
+<radialGradient id="bl"><stop offset="0" stop-color="#f59f9a" stop-opacity=".7"/><stop offset="1" stop-color="#f6c7b0" stop-opacity="0"/></radialGradient>
+<path id="st" d="M0-6L1.8-1.9L6.2-1.6L2.8 1.2L3.9 5.6L0 3.2L-3.9 5.6L-2.8 1.2L-6.2-1.6L-1.8-1.9Z" fill="#fff"/>
+<g id="hl"><path class="h" fill="url(#hg)" d="M100 8C80 8 64 20 58 42C50 66 44 100 46 132C48 160 44 186 50 208L44 226L58 214L56 236L68 214L70 240L82 210L100 200Z"/><path fill="#7a3f27" opacity=".35" d="M58 42C50 66 46 100 48 132C50 160 46 186 50 206C56 170 56 110 66 64Z"/><path d="M53 72C49 102 51 132 53 158" stroke="#e0996a" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".85"/><path d="M56 150C54 176 52 196 56 214M64 160C62 186 62 206 66 224" stroke="#6b3a2a" stroke-width=".8" fill="none" stroke-linecap="round" opacity=".7"/></g>
+<g id="fl"><path class="h" fill="url(#hg)" d="M76 64C66 84 62 108 70 128C74 140 72 152 76 162C80 150 82 138 80 124C78 104 80 84 84 70Z"/><path d="M73 84C68 102 68 118 73 134" stroke="#e0996a" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M78 96C77 112 79 128 77 144" stroke="#6b3a2a" stroke-width=".7" fill="none" stroke-linecap="round"/></g>
+<g id="lg"><path class="o" fill="#fde3d6" d="M84 250C83 270 86 286 87 298L95 298C96 284 97 268 96 250Z"/><path d="M92 252C93 270 92 284 93 296" stroke="#f0c4ae" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/><path class="o" fill="#4a2f2a" d="M82 298L97 297L99 306C99 312 94 314 90 314L74 316C68 316 68 311 73 308Z"/><path d="M85 300H97" stroke="#2f1d19" stroke-width="2" stroke-linecap="round"/><path d="M76 313C84 310 92 311 96 311" stroke="#7a5248" stroke-width=".9" fill="none"/></g>
+<g id="eye"><ellipse rx="9" ry="10.4" fill="#fff" stroke="#3b2626" stroke-width="1"/><ellipse rx="7.6" ry="9.4" cy=".8" fill="url(#ir)"/><ellipse rx="7.6" ry="9.4" cy=".8" fill="none" stroke="#5a4a8c" stroke-width=".8"/><ellipse rx="3" ry="4.2" cy="1.4" fill="#2a2140"/><ellipse cx="-2.8" cy="-3.4" rx="2.8" ry="3.2" fill="#fff"/><circle cx="3" cy="4" r="1.4" fill="#fff"/><use class="sp" href="#st" transform="translate(3.4 -1.6) scale(.4)"/><path d="M-9.6 -1.6Q0 -13 9.6 -1.6" stroke="#2a1b1b" stroke-width="2.1" fill="none" stroke-linecap="round"/><path d="M-9.6 -1.6l-2.6 -2.2" stroke="#2a1b1b" stroke-width="1.3" stroke-linecap="round"/><path d="M-8 -8Q0 -15 8 -8" stroke="#b78a82" stroke-width=".8" fill="none"/></g>
+</defs>
+<ellipse cx="100" cy="322" rx="56" ry="5" fill="rgba(0,0,0,.14)"/>
+<g id="bh"><use href="#hl"/><use href="#hl" transform="translate(200 0) scale(-1 1)"/></g>
+<use href="#lg"/><use href="#lg" transform="translate(200 0) scale(-1 1)"/>
+<path class="o" fill="#f4d9d4" d="M50 228C80 242 120 242 150 228L160 248C124 262 76 262 40 248Z"/><path d="M62 238L56 254M82 243L80 258M100 245V260M118 243L120 258M138 238L144 254" stroke="#e2b9b4" stroke-width="1"/>
+<path class="o" fill="#c9a068" d="M76 148C88 154 112 154 124 148L156 234C128 246 72 246 44 234Z"/><path fill="#a9743f" opacity=".3" d="M114 152L124 149L156 234C142 240 128 243 118 244Z"/><path d="M88 156L60 238M112 156L140 238M100 158V246" stroke="#a9743f" stroke-width=".9" fill="none"/>
+<path d="M92 128V218M108 128V218" stroke="#5a3520" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="0 14" fill="none"/><path d="M91.3 127.3V217M107.3 127.3V217" stroke="#d9ac78" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0 14" fill="none"/>
+<path class="o" fill="#b88a50" d="M75 142C88 148 112 148 125 142L126 154C112 160 88 160 74 154Z"/><rect class="o" x="93" y="143" width="14" height="12" rx="2" fill="#e0b873"/><path d="M96.5 149H103.5" stroke="#5a3520" stroke-width="1.6" stroke-linecap="round"/>
+<path class="o" fill="#c9a068" d="M70 106C74 96 86 92 100 92C114 92 126 96 130 106L126 150C112 156 88 156 74 150Z"/>
+<rect class="o" x="91" y="78" width="18" height="24" rx="8" fill="#4a3430"/><path d="M95 82V100M100 82V101M105 82V100" stroke="#2f211e" stroke-width=".9"/>
+<g id="hd"><ellipse class="h" cx="100" cy="46" rx="31" ry="30" fill="url(#hg)"/>
+<path class="o" fill="#fde3d6" d="M72 46C72 66 86 80 100 84C114 80 128 66 128 46C128 24 112 22 100 22C88 22 72 24 72 46Z"/>
+<path fill="#f1c6b0" opacity=".5" d="M76 44C90 38 110 38 124 44C116 40 84 40 76 44Z"/>
+<path class="h" fill="url(#hg)" d="M72 40C64 62 66 84 72 98C76 80 78 60 80 46Z"/><path class="h" fill="url(#hg)" d="M128 40C136 62 134 84 128 98C124 80 122 60 120 46Z"/><path class="h" fill="url(#hg)" d="M68 52C62 20 90 6 100 6C110 6 138 20 132 52C130 42 118 34 100 32C82 34 70 42 68 52Z"/>
+<path fill="#e0996a" opacity=".55" d="M80 22C92 12 108 12 120 22C108 16 92 16 80 22Z"/>
+<path class="h" fill="url(#hg)" d="M98 22C84 24 74 34 70 58C78 46 90 40 100 36Z"/><path class="h" fill="url(#hg)" d="M102 22C116 24 126 34 130 58C122 46 110 40 100 36Z"/>
+
+<path d="M78 43Q85 40 92 42M108 42Q115 40 122 43" stroke="#8a5030" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+<g id="ey"><use href="#eye" transform="translate(85 58) scale(.92)"/><use href="#eye" transform="translate(115 58) scale(-.92 .92)"/></g>
+<ellipse cx="80" cy="70" rx="7" ry="4.5" fill="url(#bl)"/><ellipse cx="120" cy="70" rx="7" ry="4.5" fill="url(#bl)"/>
+<path d="M99.4 68.5Q100 70 100.6 68.5" stroke="#d99c78" stroke-width="1" fill="none" stroke-linecap="round"/>
+<path id="mo" d="M96 74Q100 77.5 104 74" stroke="#7a3b35" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+<ellipse cx="121.0" cy="34.0" rx="4.6" ry="6.6" transform="rotate(-59 121.0 34.0)" fill="#b0663f" stroke="#5a2e1f" stroke-width=".8"/><ellipse cx="125.1" cy="41.2" rx="4.6" ry="6.6" transform="rotate(1 125.1 41.2)" fill="#a45c3a" stroke="#5a2e1f" stroke-width=".8"/><ellipse cx="128.2" cy="49.2" rx="4.6" ry="6.6" transform="rotate(-43 128.2 49.2)" fill="#b0663f" stroke="#5a2e1f" stroke-width=".8"/><ellipse cx="130.3" cy="57.9" rx="4.6" ry="6.6" transform="rotate(16 130.3 57.9)" fill="#a45c3a" stroke="#5a2e1f" stroke-width=".8"/><ellipse cx="131.4" cy="67.3" rx="4.6" ry="6.6" transform="rotate(-29 131.4 67.3)" fill="#b0663f" stroke="#5a2e1f" stroke-width=".8"/><ellipse cx="131.6" cy="77.5" rx="4.6" ry="6.6" transform="rotate(28 131.6 77.5)" fill="#a45c3a" stroke="#5a2e1f" stroke-width=".8"/><ellipse cx="130.8" cy="88.4" rx="4.6" ry="6.6" transform="rotate(-19 130.8 88.4)" fill="#b0663f" stroke="#5a2e1f" stroke-width=".8"/><ellipse cx="129.0" cy="100.0" rx="4.6" ry="6.6" transform="rotate(26 129.0 100.0)" fill="#a45c3a" stroke="#5a2e1f" stroke-width=".8"/><path d="M126.0 104.0Q129.0 116.0 132.0 104.0Z" fill="#8a4a2e" stroke="#5a2e1f" stroke-width=".8"/><circle cx="129.0" cy="103.0" r="3" fill="#f6d34e" stroke="#7a4a1a" stroke-width=".8"/>
+<g transform="translate(119 29) rotate(22) scale(.85)"><ellipse cx="-6" cy="-2" rx="6.5" ry="4.5" fill="#f6d34e" stroke="#7a4a1a" stroke-width=".9" transform="rotate(-20 -6 -2)"/><ellipse cx="6" cy="-2" rx="6.5" ry="4.5" fill="#f6d34e" stroke="#7a4a1a" stroke-width=".9" transform="rotate(20 6 -2)"/><ellipse cx="-4.5" cy="4" rx="4" ry="3" fill="#f2b93b" stroke="#7a4a1a" stroke-width=".9"/><ellipse cx="4.5" cy="4" rx="4" ry="3" fill="#f2b93b" stroke="#7a4a1a" stroke-width=".9"/><path d="M0-5V6M0-5Q-3-10-5-9M0-5Q3-10 5-9" stroke="#5a3a1a" stroke-width="1" fill="none"/></g></g>
+<g id="arms"></g></svg>
+<div id="ch" style="text-align:center;min-height:36px;margin:8px 0"></div>
+<input class="tx" id="tx" placeholder="تحدّث أو اكتب جملة الموظف هنا">
+<button class="btn go" onclick="mic()">🎤 تحدّث</button><button class="btn go" onclick="sign()">✋ ترجم بالإشارة</button>
+<div class="out" id="o2" style="margin-top:12px">تحدّث أو اكتب جملة، وسيترجمها الأفاتار بالإشارة.</div></div>
+</div>
+</section>
+
+<section id="perks">
+<div class="tag">لماذا SignBridge AI؟</div>
+<h2>مزايا الفكرة</h2>
+<div class="grid" style="margin-top:20px">
+<div class="card"><div class="ic">⚡</div><h3>ترجمة فورية</h3><p>حوار طبيعي بدون انتظار مترجم.</p></div>
+<div class="card"><div class="ic">🦋</div><h3>استقلالية</h3><p>الشخص الأصم ينجز خدماته بنفسه.</p></div>
+<div class="card"><div class="ic">🤝</div><h3>دمج مجتمعي</h3><p>خدمات عامة متاحة للجميع بالتساوي.</p></div>
+</div>
+</section>
+
+
+<footer>
+SignBridge AI · مشروع طلابي لفكرة تعليمية<br>
+الترجمة تجريبية: التعرّف على الإشارة يتم بالذكاء الاصطناعي وقد يخطئ، والأفاتار يستخدم إيماءات توضيحية وليست لغة إشارة معتمدة.
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const st=(s,m,c)=>{const o=$(s);o.className="out"+(c?" show":"");o.textContent=m};
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+let sm=null;
+if(window.claude)claude.use("sample").then(s=>sm=s).catch(()=>{});
+async function cam(){
+try{const m=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"}});const v=$("#v");v.srcObject=m;v.style.display="block";$("#snap").disabled=false;st("#o1","الكاميرا تعمل. اضغط «التقط الإشارة» ثم أدِّ الإشارة.")}
+catch(e){st("#o1","تعذّر تشغيل الكاميرا. اسمح بالوصول إليها أو جرّب متصفحًا آخر.")}
+}
+function frame(){const v=$("#v"),c=document.createElement("canvas");c.width=480;c.height=Math.round(480*v.videoHeight/v.videoWidth)||360;c.getContext("2d").drawImage(v,0,0,c.width,c.height);return new Promise(r=>c.toBlob(r,"image/jpeg",.8))}
+function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="ar-SA";speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+async function snap(){
+if(!sm)return st("#o1","هذه الميزة تعمل داخل claude.ai فقط.");
+$("#snap").disabled=true;st("#o1","🤟 أدِّ الإشارة الآن...");
+await wait(1000);
+const im=[];for(let i=0;i<3;i++){im.push(await frame());await wait(500)}
+st("#o1","⏳ الذكاء الاصطناعي يحلل الإشارة...");
+try{
+const r=await sm.json("هذه 3 إطارات متتالية من كاميرا لشخص يؤدي إشارة بلغة الإشارة العربية أو يهجّي حروفًا بأصابعه. فسّر المقصود في جملة عربية قصيرة. إن لم تكن الإشارة واضحة أو لم تكن متأكدًا فلا تخمّن واترك النص فارغًا. أعد JSON فقط: {\"text\":\"...\",\"conf\":\"عالية أو متوسطة أو منخفضة\"}",{images:im,cache:false});
+if(r.text){st("#o1","💬 يظهر للموظف: «"+r.text+"» 🔊 (الثقة: "+(r.conf||"غير محددة")+")",1);speak(r.text)}
+else st("#o1","لم أتعرف على إشارة واضحة. قرّب يدك من الكاميرا وحاول مرة أخرى.");
+}catch(e){st("#o1","تعذّر التحليل الآن، حاول مرة أخرى بعد قليل.")}
+$("#snap").disabled=false;
+}
+const R1=(x,y,s)=>[72,196,x,y,s],B2=(a,b,c,d,s)=>[a,b,c,d,s];
+const G={
+wave:["تحية/مرحبًا",[R1(148,44,"open"),R1(160,52,"open"),R1(146,44,"open"),R1(160,52,"open")]],
+self:["أنا",[R1(100,112,"point"),R1(100,118,"point")]],
+you:["أنت",[R1(168,108,"point")]],
+we:["نحن",[R1(100,112,"point"),R1(150,118,"point"),R1(100,112,"point")]],
+want:["أريد/أحتاج",[B2(78,135,122,135,"open"),B2(84,150,116,150,"open"),B2(78,135,122,135,"open")]],
+give:["أعطني/خذ",[B2(80,128,120,128,"flat"),B2(94,138,106,138,"flat")]],
+go:["أذهب/اذهب",[R1(110,120,"point"),R1(160,100,"point")]],
+come:["تعال/قادم",[R1(160,100,"point"),R1(110,120,"point")]],
+look:["انظر/ابحث",[R1(114,44,"point"),R1(150,60,"point")]],
+doctor:["طبيب/دواء/مستشفى",[B2(90,130,100,124,"point"),B2(90,130,96,128,"point"),B2(90,130,100,124,"point")]],
+ask:["أسأل/سؤال",[R1(140,96,"point"),R1(146,84,"point"),R1(140,96,"point")]],
+help:["ساعدني/مساعدة",[B2(98,142,102,132,"flat"),B2(98,128,102,118,"flat")]],
+wait:["انتظر",[B2(80,126,120,126,"open"),B2(80,126,120,126,"claw"),B2(80,126,120,126,"open"),B2(80,126,120,126,"claw")]],
+know:["أعرف/أفهم",[R1(120,48,"flat"),R1(126,34,"point")]],
+again:["أعد/مرة أخرى",[R1(130,110,"flat"),R1(150,100,"flat"),R1(130,110,"flat")]],
+write:["اكتب/املأ/وقّع",[B2(88,132,112,126,"pinch"),B2(88,132,126,130,"pinch")]],
+pay:["ادفع/سداد",[B2(80,134,120,134,"open"),B2(80,134,150,124,"pinch")]],
+money:["مال/حساب/بنك",[B2(80,135,120,135,"fist"),B2(84,140,116,132,"pinch"),B2(80,135,120,135,"fist")]],
+good:["جيد/تمام",[R1(150,70,"thumb"),R1(150,62,"thumb")]],
+no:["لا/ممنوع/قف",[R1(150,98,"open"),R1(160,98,"open"),R1(150,98,"open")]],
+yes:["نعم/موافق",[R1(128,48,"fist"),R1(128,66,"fist"),R1(128,48,"fist")]],
+sorry:["آسف",[R1(92,116,"fist"),R1(100,124,"fist"),R1(108,116,"fist"),R1(100,108,"fist")]],
+thanks:["شكرًا",[R1(108,68,"open"),R1(146,100,"open")]],
+sit:["تفضل/من فضلك",[B2(76,130,124,130,"open"),B2(76,146,124,146,"open")]],
+sick:["مريض/تعبان",[B2(96,142,116,40,"open"),B2(96,148,116,44,"open")]],
+pain:["ألم/وجع",[B2(90,125,110,125,"point"),B2(96,135,104,135,"point"),B2(90,125,110,125,"point")]],
+problem:["مشكلة",[B2(88,126,112,126,"fist"),B2(92,130,108,122,"fist"),B2(88,126,112,126,"fist")]],
+more:["أكثر/كمان",[B2(90,130,110,130,"pinch"),B2(98,130,102,130,"pinch"),B2(90,130,110,130,"pinch")]],
+doc:["أوراق/هوية/بطاقة",[B2(80,118,120,118,"open"),B2(80,152,120,152,"open"),B2(80,118,120,118,"open")]],
+name:["اسم",[B2(90,120,110,120,"v"),B2(96,124,104,124,"v"),B2(90,120,110,120,"v")]],
+phone:["هاتف/اتصال/رقم",[R1(142,52,"y"),R1(144,58,"y")]],
+time:["وقت/ساعة/موعد",[B2(88,130,92,124,"point"),B2(88,130,94,128,"point")]],
+home:["بيت/منزل/سكن",[B2(86,72,114,72,"flat"),B2(86,92,114,92,"flat")]],
+now:["الآن/اليوم",[B2(82,128,118,128,"open"),B2(82,144,118,144,"open"),B2(82,128,118,128,"open")]],
+tomorrow:["غدًا/لاحقًا",[R1(130,90,"thumb"),R1(164,70,"thumb")]],
+start:["افتح/ابدأ",[B2(96,128,104,128,"flat"),B2(76,128,124,128,"flat")]],
+done:["انتهى/تم/أنهِ",[B2(80,125,120,125,"open"),B2(80,145,120,145,"flat")]],
+where:["أين/مكان",[R1(138,100,"point"),R1(150,100,"point"),R1(138,100,"point")]],
+what:["ماذا/لماذا/كيف",[B2(82,128,118,128,"open"),B2(78,134,122,134,"open"),B2(82,128,118,128,"open")]],
+love:["أحب/يعجبني",[B2(100,112,102,112,"fist"),B2(98,114,104,114,"fist")]],
+spell:["هجاء (كلمة بلا إيماءة)",[R1(112,100,"p1"),R1(112,100,"p2"),R1(112,100,"fist"),R1(112,100,"p3"),R1(112,100,"open")]]};
+["واحد","اثنان","ثلاثة","أربعة","خمسة"].forEach((w,i)=>G["n"+(i+1)]=[w,[R1(148,70,"p"+(i+1))]]);
+const SH={open:[0,0,0,0,0],flat:[0,0,0,0,0],fist:[1,1,1,1,1],point:[1,0,1,1,1],rest:[.3,.3,.3,.3,.3],claw:[.5,.5,.5,.5,.5],pinch:[.6,.7,.9,.9,.9],thumb:[0,1,1,1,1],v:[1,0,0,1,1],y:[0,1,1,1,0],p1:[1,0,1,1,1],p2:[1,0,0,1,1],p3:[1,0,0,0,1],p4:[1,0,0,0,0],p5:[0,0,0,0,0]};
+let tg=null,busy=0,fc=[.3,.3,.3,.3,.3];const cur={lx:72,ly:196,rx:128,ry:196},vel={lx:0,ly:0,rx:0,ry:0};
+const SK="#fde3d6",LN="#4a2a24",HL="#7a3f33";
+const pt=q=>q[0].toFixed(1)+" "+q[1].toFixed(1);
+const smp=(p,m)=>{let d=(m?"M":"L")+pt(p[0]);for(let i=1;i<p.length-1;i++){const a=p[i],b=p[i+1];d+="Q"+pt(a)+" "+pt([(a[0]+b[0])/2,(a[1]+b[1])/2])}return d+"L"+pt(p[p.length-1])};
+function fgr(x0,y0,a,l,w,k,sd){
+const sg=[l*.42,l*.33,l*.25],an=[a,a-sd*k*1.3,a-sd*k*2.6],P=[[x0,y0]];
+sg.forEach((s,i)=>{const q=P[i];P.push([q[0]+Math.sin(an[i])*s,q[1]-Math.cos(an[i])*s])});
+const D=[an[0],(an[0]+an[1])/2,(an[1]+an[2])/2,an[2]],Lf=[],Rt=[];
+P.forEach((q,i)=>{const nx=Math.cos(D[i]),ny=Math.sin(D[i]),r=w[i]/2;Lf.push([q[0]+nx*r,q[1]+ny*r]);Rt.push([q[0]-nx*r,q[1]-ny*r])});
+const tc=[P[3][0]+Math.sin(an[2])*w[3]*.75,P[3][1]-Math.cos(an[2])*w[3]*.75],d=smp(Lf,1)+"Q"+pt(tc)+" "+pt(Rt[3])+smp(Rt.slice().reverse(),0),
+cx=P[1][0],cy=P[1][1],nx=Math.cos(D[1]),ny=Math.sin(D[1]),r=w[1]*.3;
+return `<path d="${d}" fill="${SK}"/><path d="${d}" fill="none" stroke="${HL}" stroke-width=".8" stroke-linejoin="round" stroke-linecap="round"/><path d="M${pt([cx+nx*r,cy+ny*r])}L${pt([cx-nx*r,cy-ny*r])}" stroke="#e3b8a2" stroke-width=".6" stroke-linecap="round"/>`}
+function hand(x,y,an,sd){
+const Lg=[14,20,22,20,16],B=[[-sd*7.5,5],[-sd*5,-8],[-sd*1.7,-10],[sd*1.7,-9.5],[sd*5,-7]],SP=[0,9,3,-3,-9],W=[[6,4.8,4,3],[4.6,4,3.4,2.4],[4.8,4.2,3.5,2.5],[4.6,4,3.4,2.4],[4,3.6,3,2.2]],
+pm="M-8 -8C-9.5 0-7 9-5 14C0 16 5 14 5 14C7 9 9.5 0 8 -8C0 -11-4 -11-8 -8Z",th=`cx="${-sd*6.5}" cy="4" rx="3.4" ry="6.2" transform="rotate(${-sd*16} ${-sd*6.5} 4)"`;
+let f="";
+[4,3,2,1,0].forEach(i=>{const a=(i?-sd*SP[i]*(1-fc[i]):-sd*(65-fc[0]*95))*Math.PI/180;f+=fgr(B[i][0],B[i][1],a,Lg[i],W[i],fc[i],sd)});
+return `<g transform="translate(${x} ${y}) rotate(${an}) scale(1.3) translate(0 -12)"><path d="${pm}" fill="${SK}" stroke="${HL}" stroke-width="1.7" stroke-linejoin="round"/><ellipse ${th} fill="${SK}" stroke="${HL}" stroke-width="1.7"/><path d="${pm}" fill="${SK}"/><ellipse ${th} fill="${SK}"/><path d="M-4 -4Q-3 4 -2 11M0 -5V11M4 -4Q3 4 2 11" stroke="#efc6b0" stroke-width=".7" fill="none" stroke-linecap="round"/><path d="M-7 -7Q-5 -9-3 -7.5M-3 -8.5Q0 -10.5 3 -8.5M3 -7.5Q5 -9 7 -7" stroke="#e3b8a2" stroke-width=".7" fill="none" stroke-linecap="round"/>${f}</g>`}
+const CAM="#c9a068",CD="#a9743f",DK="#5a3520",WT=[[0,15],[.3,16.5],[.5,16],[.76,25],[.92,17],[1,13.5]];
+const wf=t=>{for(let i=1;i<WT.length;i++)if(t<=WT[i][0]){const a=WT[i-1],b=WT[i];return a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0])}return 13.5};
+function sleeve(S,E,C,sd){
+const N=14,P=[],Ec=[2*E[0]-(S[0]+C[0])/2,2*E[1]-(S[1]+C[1])/2];
+for(let i=0;i<=N;i++){const t=i/N,u=1-t;P.push([u*u*S[0]+2*u*t*Ec[0]+t*t*C[0],u*u*S[1]+2*u*t*Ec[1]+t*t*C[1]])}
+const L=[],R=[],NV=[];
+P.forEach((q,i)=>{const a=P[Math.max(0,i-1)],b=P[Math.min(N,i+1)],dx=b[0]-a[0],dy=b[1]-a[1],m=Math.hypot(dx,dy)||1,nx=-dy/m,ny=dx/m,r=wf(i/N)/2;NV.push([nx,ny,r]);L.push([q[0]+nx*r,q[1]+ny*r]);R.push([q[0]-nx*r,q[1]-ny*r])});
+const d=smp(L,1)+smp(R.slice().reverse(),0)+"Z";
+let g=`<path d="${d}" fill="${CAM}" stroke="${LN}" stroke-width=".9" stroke-linejoin="round"/>`;
+for(const o of [-.5,0,.5]){const a=P[N-1],b=P[N-4],n1=NV[N-1],n2=NV[N-4];g+=`<path d="M${pt([a[0]+n1[0]*n1[2]*o*2,a[1]+n1[1]*n1[2]*o*2])}L${pt([b[0]+n2[0]*n2[2]*o*2,b[1]+n2[1]*n2[2]*o*2])}" stroke="${CD}" stroke-width=".8" stroke-linecap="round"/>`}
+return g}
+function arm(sx,sy,x,y,sd){
+const A=52,B=48,dx=x-sx,dy=y-sy,d=Math.max(24,Math.min(Math.hypot(dx,dy),A+B-1)),an=Math.atan2(dy,dx),c=Math.acos((A*A+d*d-B*B)/(2*A*d)),E1=[sx+A*Math.cos(an+c),sy+A*Math.sin(an+c)],E2=[sx+A*Math.cos(an-c),sy+A*Math.sin(an-c)],EE=(E1[1]+.5*Math.abs(E1[0]-100)>=E2[1]+.5*Math.abs(E2[0]-100))?E1:E2,ex=EE[0],ey=EE[1],hx=sx+d*Math.cos(an),hy=sy+d*Math.sin(an),ux=hx-ex,uy=hy-ey,n=Math.hypot(ux,uy)||1,vx=ux/n,vy=uy/n,cx=hx-vx*10,cy=hy-vy*10,px=-vy,py=vx,
+cuff=`<path d="M${pt([cx+px*6.5,cy+py*6.5])}L${pt([hx+px*8,hy+py*8])}L${pt([hx-px*8,hy-py*8])}L${pt([cx-px*6.5,cy-py*6.5])}Z" fill="${CD}" stroke="${LN}" stroke-width=".9" stroke-linejoin="round"/><circle cx="${cx+vx*3.5}" cy="${cy+vy*3.5}" r="1.5" fill="${DK}"/><circle cx="${cx+vx*7}" cy="${cy+vy*7}" r="1.5" fill="${DK}"/>`;
+return [sleeve([sx,sy],[ex,ey],[cx,cy],sd)+cuff,hand(hx,hy,(hy<165?.22:1)*Math.atan2(ux,-uy)*180/Math.PI,-sd)]}
+const CL="M91 88C80 86 62 90 52 104C49 110 54 116 61 115C70 112 80 116 87 124L100 140C98 120 96 100 91 88Z";
+const OV=`<path class="o" fill="#4a3430" d="M89 94L111 94L116 122C108 130 104 134 100 138C96 134 92 130 84 122Z"/><path d="M94 96V128M100 96V134M106 96V128" stroke="#2f211e" stroke-width=".9"/><path class="o" fill="#d7ae78" d="${CL}"/><path class="o" fill="#d7ae78" transform="translate(200 0) scale(-1 1)" d="${CL}"/><path d="M58 110C68 104 78 108 86 116M142 110C132 104 122 108 114 116" stroke="#a9743f" stroke-width=".9" fill="none"/><use href="#fl"/><use href="#fl" transform="translate(200 0) scale(-1 1)"/>`;
+function loop(t){
+requestAnimationFrame(loop);const s=t/1000,g=tg||[72,196,128,196,"rest"],tt={lx:g[0],ly:g[1],rx:g[2],ry:g[3]};
+for(const k in cur){vel[k]=(vel[k]+(tt[k]-cur[k])*.055)*.8;cur[k]+=vel[k]}
+const cv=SH[g[4]]||SH.rest;fc=fc.map((c,i)=>c+(cv[i]-c)*.18);
+const A1=arm(72,102,cur.lx,cur.ly,1),A2=arm(128,102,cur.rx,cur.ry,-1);$("#arms").innerHTML=A1[0]+A2[0]+OV+A1[1]+A2[1];
+$("#hd").setAttribute("transform",`translate(0 ${Math.sin(s*1.6)*1.2}) rotate(${Math.sin(s*.7)*2.5+(busy?Math.sin(s*3)*1.5:0)} 100 78)`);
+$("#bh").setAttribute("transform",`rotate(${Math.sin(s*1.1)*.8} 100 40)`);const mo=$("#mo");mo.setAttribute("d",busy?"M94 74Q100 85 106 74Z":"M95 75Q100 79 105 75");mo.setAttribute("fill",busy?"#c0605f":"none");$("#ey").style.transform=`scaleY(${(s%4)<.12?.1:1})`;
+}
+async function play(fr){busy=1;for(const f of fr){tg=f;await wait(800)}busy=0}
+function mic(){
+const R=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!R)return st("#o2","المتصفح لا يدعم التعرف على الصوت. اكتب الجملة في الخانة.");
+const r=new R();r.lang="ar-EG";
+r.onresult=e=>{$("#tx").value=e.results[0][0].transcript;sign()};
+r.onerror=()=>st("#o2","تعذّر الوصول للميكروفون. اكتب الجملة في الخانة.");
+st("#o2","🎤 تحدّث الآن...");try{r.start()}catch(e){}
+}
+async function sign(){
+const t=$("#tx").value.trim();if(!t)return;
+if(!sm)return st("#o2","هذه الميزة تعمل داخل claude.ai فقط.");
+st("#o2","⏳ جارٍ تحويل الكلام إلى إشارات...");$("#ch").textContent="";
+try{
+const a=await sm.json("حوّل الجملة العربية التالية إلى تسلسل إيماءات لأفاتار يترجمها بلغة الإشارة: «"+t+"». اختر لكل كلمة مهمة (حتى 12 كلمة) أقرب إيماءة معنىً من هذه القائمة فقط، واستخدم spell للكلمة التي لا توجد لها إيماءة مناسبة ("+Object.entries(G).map(([k,v])=>k+"="+v[0]).join("، ")+"). أعد JSON فقط: مصفوفة عناصر بالشكل {\"w\":\"الكلمة\",\"g\":\"معرّف الإيماءة\"}.",{cache:false});
+const L=a.filter(x=>G[x.g]).slice(0,12),cs=L.map(x=>{const s=document.createElement("span");s.className="chip";s.textContent=x.w;$("#ch").append(s);return s});
+st("#o2","🧑‍🎤 الأفاتار يترجم الآن...",1);
+for(let i=0;i<L.length;i++){cs[i].classList.add("on");await play(G[L[i].g][1]);cs[i].classList.remove("on")}
+await play([[72,196,128,196,"rest"]]);st("#o2","✔ انتهت الترجمة. اضغط «ترجم بالإشارة» لإعادتها.");
+}catch(e){st("#o2","تعذّرت الترجمة الآن، حاول مرة أخرى.")}
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
